@@ -1,0 +1,14 @@
+D:\FPTU\Semester5\SWP391\EF\bin\Debug\net9.0\EF.exe
+D:\FPTU\Semester5\SWP391\EF\bin\Debug\net9.0\EF.deps.json
+D:\FPTU\Semester5\SWP391\EF\bin\Debug\net9.0\EF.runtimeconfig.json
+D:\FPTU\Semester5\SWP391\EF\bin\Debug\net9.0\EF.dll
+D:\FPTU\Semester5\SWP391\EF\bin\Debug\net9.0\EF.pdb
+D:\FPTU\Semester5\SWP391\EF\obj\Debug\net9.0\EF.GeneratedMSBuildEditorConfig.editorconfig
+D:\FPTU\Semester5\SWP391\EF\obj\Debug\net9.0\EF.AssemblyInfoInputs.cache
+D:\FPTU\Semester5\SWP391\EF\obj\Debug\net9.0\EF.AssemblyInfo.cs
+D:\FPTU\Semester5\SWP391\EF\obj\Debug\net9.0\EF.csproj.CoreCompileInputs.cache
+D:\FPTU\Semester5\SWP391\EF\obj\Debug\net9.0\EF.dll
+D:\FPTU\Semester5\SWP391\EF\obj\Debug\net9.0\refint\EF.dll
+D:\FPTU\Semester5\SWP391\EF\obj\Debug\net9.0\EF.pdb
+D:\FPTU\Semester5\SWP391\EF\obj\Debug\net9.0\EF.genruntimeconfig.cache
+D:\FPTU\Semester5\SWP391\EF\obj\Debug\net9.0\ref\EF.dll

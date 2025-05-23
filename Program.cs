@@ -10,7 +10,7 @@ namespace EF
             // Entity -> Database, Table
             // Database - SQL Server: data01 -> DbContext
             // --product
-            Console.WriteLine("Hello, World!");
+            var dbcontext = new ProductDbContext();
         }
     }
 }

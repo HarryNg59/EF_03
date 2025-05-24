@@ -159,7 +159,8 @@ namespace EF
             // RenameProduct(1, "Laptop 02");
             // DeleteProduct(1);
 
-            //Login
+            //Logging-
+
         }
     }
 }

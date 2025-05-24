@@ -65,3 +65,13 @@ D:\FPTU\Semester5\SWP391\EF\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Wind
 D:\FPTU\Semester5\SWP391\EF\obj\Debug\net9.0\EF.csproj.AssemblyReference.cache
 D:\FPTU\Semester5\SWP391\EF\obj\Debug\net9.0\EF.sourcelink.json
 D:\FPTU\Semester5\SWP391\EF\obj\Debug\net9.0\EF.csproj.Up2Date
+D:\FPTU\Semester5\SWP391\EF\bin\Debug\net9.0\Microsoft.Extensions.Configuration.dll
+D:\FPTU\Semester5\SWP391\EF\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Binder.dll
+D:\FPTU\Semester5\SWP391\EF\bin\Debug\net9.0\Microsoft.Extensions.Configuration.FileExtensions.dll
+D:\FPTU\Semester5\SWP391\EF\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Json.dll
+D:\FPTU\Semester5\SWP391\EF\bin\Debug\net9.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+D:\FPTU\Semester5\SWP391\EF\bin\Debug\net9.0\Microsoft.Extensions.FileProviders.Physical.dll
+D:\FPTU\Semester5\SWP391\EF\bin\Debug\net9.0\Microsoft.Extensions.FileSystemGlobbing.dll
+D:\FPTU\Semester5\SWP391\EF\bin\Debug\net9.0\Microsoft.Extensions.Logging.Configuration.dll
+D:\FPTU\Semester5\SWP391\EF\bin\Debug\net9.0\Microsoft.Extensions.Logging.Console.dll
+D:\FPTU\Semester5\SWP391\EF\bin\Debug\net9.0\Microsoft.Extensions.Options.ConfigurationExtensions.dll

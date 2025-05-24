@@ -7,17 +7,25 @@ namespace EF
     [Table("Product")]
     public class Product
     {
-        [Key]
+        [Key]//primary key
         public int ProductId { get; set; }
 
+        [Required]//not null
+        [StringLength(50)]//Nvarchar(50)
+        [Column("Tensanpham", TypeName = "ntext")]
+        public string Name { get; set; }
+
+        [Column(TypeName = "money")]
+        public decimal Price { get; set; }
+
+        public int? CategId { get; set; }
+
+        //cách tạo ra foreign key
+        [ForeignKey("CategId")]
         [Required]
-        [StringLength(50)]
-        public string ProductName { get; set; }
+        public Category Category { get; set; } //FK -> PK
 
-        [StringLength(50)]
-        public string Provider { get; set; }
-
-        public void PrintInfor() => Console.WriteLine($"{ProductId} - {ProductName} - {Provider}");
+        public void PrintInfor() => Console.WriteLine($"{ProductId} - {Name} - {Price}");
     }
     
 }

@@ -9,7 +9,7 @@ namespace EF
     {
         static void CreateDatabase()
         {
-            using var dbcontext = new ProductDbContext();
+            using var dbcontext = new ShopContext();
             string dbname = dbcontext.Database.GetDbConnection().Database;
 
             var result = dbcontext.Database.EnsureCreated();
@@ -26,7 +26,7 @@ namespace EF
 
         static void DropDatabase()
         {
-            using var dbcontext = new ProductDbContext();
+            using var dbcontext = new ShopContext();
             string dbname = dbcontext.Database.GetDbConnection().Database;
 
             var result = dbcontext.Database.EnsureDeleted();
@@ -41,37 +41,23 @@ namespace EF
             }
         }
 
-        static void InsertProduct()
+        static void InsertData()
         {
-            using var dbcontext = new ProductDbContext();
-            /* Các bước insert sp
-            Model (Product)
-            Add, AddAsyc
-            SaveChanges
-            */
+            using var dbcontext = new ShopContext();
 
-            //Thêm 1 dòng
-            // var p1 = new Product();
-            // p1.ProductName = "San pham 1";
-            // p1.Provider = "Cong ty 1";
+            // Category c1 = new Category() { Name = "Dien thoai", Description = "Cac loai dien thoai" };
+            // Category c2 = new Category() { Name = "Do uong", Description = "Cac loai do uong" };
+            // dbcontext.categories.Add(c1);
+            // dbcontext.categories.Add(c2);
 
-            // var p1 = new Product()
-            // {
-            //     ProductName = "San pham 2",
-            //     Provider = "Cong ty 2"
-            // };
+            var c1 = (from c in dbcontext.categories where c.CategoryID == 1 select c).FirstOrDefault();
+            var c2 = (from c in dbcontext.categories where c.CategoryID == 2 select c).FirstOrDefault();
 
-            // dbcontext.Add(p1);
-
-            //Thêm nhiều dòng
-            var products = new object[]{
-                new Product() {ProductName = "San pham 3", Provider = "Cong ty 3"},
-                new Product() {ProductName = "San pham 4", Provider = "Cong ty 4"},
-                new Product() {ProductName = "San pham 5", Provider = "Cong ty 5"},
-            };
-
-            dbcontext.AddRange(products);
-
+            dbcontext.Add(new Product() { Name = "Iphone 8", Price = 1000, CategId = 1 });
+            dbcontext.Add(new Product() { Name = "Samsung", Price = 900, Category = c1 });
+            dbcontext.Add(new Product() { Name = "Ruou vang", Price = 500, Category = c2 });
+            dbcontext.Add(new Product() { Name = "Nokia", Price = 600, Category = c1 });
+            dbcontext.Add(new Product() { Name = "Cafe", Price = 100, Category = c2 });
 
             int numRowsChange = dbcontext.SaveChanges();//gọi khi làm bất kì tác vụ nào liên quan tới database
                                                         //trả về số dòng bị tác động
@@ -80,68 +66,51 @@ namespace EF
 
         static void ReadProduct()
         {
-            using var dbcontext = new ProductDbContext();
-            //LINQ
-            //Truy vấn toàn bộ
-            // var products = dbcontext.products.ToList();
-            // products.ForEach(product => product.PrintInfor());
-
-            //Truy vấn có điều kiện
-            //lấy ra sp có id > 3
-            // var products = from product in dbcontext.products
-            //                where product.ProductId >= 3
-            //                select product;
-            //lấy ra sp có nsx là cong và xếp theo chiều giảm giần của id
-            // var products = from product in dbcontext.products
-            //                where product.Provider.Contains("Cong")
-            //                orderby product.ProductId descending
-            //                select product;
-            // products.ToList().ForEach(product => product.PrintInfor());
-
-            //Lấy ra sp có id = 4
-            Product product = (from p in dbcontext.products
-                               where p.ProductId == 4
+            using var dbcontext = new ShopContext();
+            
+            var product = (from p in dbcontext.products
+                               where p.ProductId == 3
                                select p).FirstOrDefault();//nếu thấy thì trả về kq, ko có thì trả về null
             if (product != null) product.PrintInfor();
         }
 
-        static void RenameProduct(int id, string newName)
-        {
-            using var dbcontext = new ProductDbContext();
+        // static void RenameProduct(int id, string newName)
+        // {
+        //     using var dbcontext = new ShopContext();
 
-            Product product = (from p in dbcontext.products
-                               where p.ProductId == id
-                               select p).FirstOrDefault();
+        //     Product product = (from p in dbcontext.products
+        //                        where p.ProductId == id
+        //                        select p).FirstOrDefault();
 
-            if (product != null)
-            {
-                //product -> DbContext
-                EntityEntry<Product> entry = dbcontext.Entry(product);
-                entry.State = EntityState.Detached;
-                //code như này có nghĩa là tách table Product khỏi sự kiểm soát của DBcontext
-                //có nghĩa là ko thay đổi được dữ liệu nữa nếu code như này
+        //     if (product != null)
+        //     {
+        //         //product -> DbContext
+        //         EntityEntry<Product> entry = dbcontext.Entry(product);
+        //         entry.State = EntityState.Detached;
+        //         //code như này có nghĩa là tách table Product khỏi sự kiểm soát của DBcontext
+        //         //có nghĩa là ko thay đổi được dữ liệu nữa nếu code như này
 
-                product.ProductName = newName;
-                int numRowsChange = dbcontext.SaveChanges();
-                Console.WriteLine($"Da sua {numRowsChange} dong du lieu");
-            }
-        }
+        //         product.ProductName = newName;
+        //         int numRowsChange = dbcontext.SaveChanges();
+        //         Console.WriteLine($"Da sua {numRowsChange} dong du lieu");
+        //     }
+        // }
 
-        static void DeleteProduct(int id)
-        {
-            using var dbcontext = new ProductDbContext();
+        // static void DeleteProduct(int id)
+        // {
+        //     using var dbcontext = new ShopContext();
 
-            Product product = (from p in dbcontext.products
-                               where p.ProductId == id
-                               select p).FirstOrDefault();
+        //     Product product = (from p in dbcontext.products
+        //                        where p.ProductId == id
+        //                        select p).FirstOrDefault();
 
-            if (product != null)
-            {
-                dbcontext.Remove(product);
-                int numRowsChange = dbcontext.SaveChanges();
-                Console.WriteLine($"Da xoa {numRowsChange} dong du lieu");
-            }
-        }
+        //     if (product != null)
+        //     {
+        //         dbcontext.Remove(product);
+        //         int numRowsChange = dbcontext.SaveChanges();
+        //         Console.WriteLine($"Da xoa {numRowsChange} dong du lieu");
+        //     }
+        // }
 
         static void Main(string[] args)
         {
@@ -154,8 +123,8 @@ namespace EF
             // DropDatabase();
 
             //Insert, Select, Update, Delete
-            // InsertProduct();
-            // ReadProduct();
+            // InsertData();
+            ReadProduct();
             // RenameProduct(1, "Laptop 02");
             // DeleteProduct(1);
 

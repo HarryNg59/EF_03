@@ -45,10 +45,10 @@ namespace EF
         {
             using var dbcontext = new ShopContext();
 
-            // Category c1 = new Category() { Name = "Dien thoai", Description = "Cac loai dien thoai" };
-            // Category c2 = new Category() { Name = "Do uong", Description = "Cac loai do uong" };
-            // dbcontext.categories.Add(c1);
-            // dbcontext.categories.Add(c2);
+            // Category ca1 = new Category() { Name = "Dien thoai", Description = "Cac loai dien thoai" };
+            // Category ca2 = new Category() { Name = "Do uong", Description = "Cac loai do uong" };
+            // dbcontext.categories.Add(ca1);
+            // dbcontext.categories.Add(ca2);
 
             var c1 = (from c in dbcontext.categories where c.CategoryID == 1 select c).FirstOrDefault();
             var c2 = (from c in dbcontext.categories where c.CategoryID == 2 select c).FirstOrDefault();
@@ -58,6 +58,8 @@ namespace EF
             dbcontext.Add(new Product() { Name = "Ruou vang", Price = 500, Category = c2 });
             dbcontext.Add(new Product() { Name = "Nokia", Price = 600, Category = c1 });
             dbcontext.Add(new Product() { Name = "Cafe", Price = 100, Category = c2 });
+            dbcontext.Add(new Product() { Name = "Nuoc ngot", Price = 50, Category = c2 });
+            dbcontext.Add(new Product() { Name = "Bia", Price = 200, Category = c2 });
 
             int numRowsChange = dbcontext.SaveChanges();//gọi khi làm bất kì tác vụ nào liên quan tới database
                                                         //trả về số dòng bị tác động
@@ -67,11 +69,40 @@ namespace EF
         static void ReadProduct()
         {
             using var dbcontext = new ShopContext();
-            
-            var product = (from p in dbcontext.products
-                               where p.ProductId == 3
-                               select p).FirstOrDefault();//nếu thấy thì trả về kq, ko có thì trả về null
-            if (product != null) product.PrintInfor();
+                        
+            // //truy vấn dạng join bảng để lấy nhiều hàng dữ liệu
+            // var category = (from c in dbcontext.categories
+            //                 where c.CategoryID == 2
+            //                 select c).FirstOrDefault();
+            // Console.WriteLine($"{category.CategoryID} - {category.Name}");
+
+            // // var e = dbcontext.Entry(category);
+            // // e.Collection(c => c.Products).Load();//điều hướng tập hợp, dùng để lưu trữ nhìu sản phẩm
+            // //do đã có virtual của proxies nên ko cần 2 dòng code này
+
+            // if (category.Products != null)
+            // {
+            //     Console.WriteLine($"So san pham: {category.Products.Count()}");
+            //     category.Products.ForEach(p => p.PrintInfor());
+            // }
+            // else Console.WriteLine("Product == null");
+
+            // truy vấn dạng join nhưng chỉ lấy 1 hàng dữ liệu
+            // var product = (from p in dbcontext.products
+            //                where p.ProductId == 3
+            //                select p).FirstOrDefault();//nếu thấy thì trả về kq, ko có thì trả về null
+
+            // //Cách truy xuất 1 bảng khác theo khóa ngoại
+            // // var e = dbcontext.Entry(product);//dùng nạp dữ liệu tham chiếu vào 1 model khác
+            // // e.Reference(p => p.Category).Load();//lấy về dữ liệu tham chiếu
+
+            // if (product != null) product.PrintInfor();
+
+            // if (product.Category != null)
+            // {
+            //     Console.WriteLine($"{product.Category.Name} - {product.Category.Description}");
+            // }
+            // else Console.WriteLine("Category == null");
         }
 
         // static void RenameProduct(int id, string newName)
@@ -96,21 +127,23 @@ namespace EF
         //     }
         // }
 
-        // static void DeleteProduct(int id)
-        // {
-        //     using var dbcontext = new ShopContext();
+        static void DeleteCategory()
+        {
+            using var dbcontext = new ShopContext();
 
-        //     Product product = (from p in dbcontext.products
-        //                        where p.ProductId == id
-        //                        select p).FirstOrDefault();
+            var category = (from c in dbcontext.categories
+                            where c.CategoryID == 1
+                            select c).FirstOrDefault();
 
-        //     if (product != null)
-        //     {
-        //         dbcontext.Remove(product);
-        //         int numRowsChange = dbcontext.SaveChanges();
-        //         Console.WriteLine($"Da xoa {numRowsChange} dong du lieu");
-        //     }
-        // }
+            
+
+            if (category != null)
+            {
+                dbcontext.Remove(category);
+                int numRowsChange = dbcontext.SaveChanges();
+                Console.WriteLine($"Da xoa {numRowsChange} dong du lieu");
+            }
+        }
 
         static void Main(string[] args)
         {
@@ -123,10 +156,10 @@ namespace EF
             // DropDatabase();
 
             //Insert, Select, Update, Delete
-            // InsertData();
-            ReadProduct();
+            InsertData();
+            // ReadProduct();
             // RenameProduct(1, "Laptop 02");
-            // DeleteProduct(1);
+            // DeleteCategory();
 
             //Logging-
 

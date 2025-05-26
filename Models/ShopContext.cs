@@ -26,6 +26,7 @@ namespace EF
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseLoggerFactory(loggerFactory);
             optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder.UseLazyLoadingProxies();//tự động nạp những cái reference
         }
     }
 }

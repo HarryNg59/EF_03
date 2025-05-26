@@ -15,5 +15,8 @@ namespace EF
 
         [Column(TypeName = "ntext")]
         public string Description { set; get; }
+
+        //Collect Nagivation: điều hướng tập hợp -> ko tạo ra Foreign key
+        public virtual List<Product> Products { set; get; }
     }
 }

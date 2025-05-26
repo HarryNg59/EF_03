@@ -18,14 +18,22 @@ namespace EF
         [Column(TypeName = "money")]
         public decimal Price { get; set; }
 
-        public int? CategId { get; set; }
-
+        public int CategId { get; set; } //có ? sau int thì là ON DELETE CASCADE
+        //Reference Nagivation -> tham chiếu từ model này sang model khác Foreign key (quan hệ 1-nhiều)
         //cách tạo ra foreign key
         [ForeignKey("CategId")]
-        [Required]
-        public Category Category { get; set; } //FK -> PK
+        // [Required]
+        public virtual Category Category { get; set; } //FK -> PK
 
-        public void PrintInfor() => Console.WriteLine($"{ProductId} - {Name} - {Price}");
+        public int? CategId2 { get; set; }
+        //Reference Nagivation -> tham chiếu từ model này sang model khác Foreign key (quan hệ 1-nhiều)
+        //cách tạo ra foreign key
+        [ForeignKey("CategId2")]
+        [InverseProperty("Products")]
+        // [Required]
+        public virtual Category Category2 { get; set; } //FK -> PK
+
+        public void PrintInfor() => Console.WriteLine($"{ProductId} - {Name} - {Price} - {CategId}");
     }
     
 }

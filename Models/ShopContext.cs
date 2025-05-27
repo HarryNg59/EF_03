@@ -5,11 +5,13 @@ namespace EF
 {
     public class ShopContext : DbContext
     {
-        public static readonly ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>{
+
+        public static readonly ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>
+        {
             builder.AddFilter(DbLoggerCategory.Query.Name, LogLevel.Information);
             // buider.AddFilter(DbLoggerCategory.Database.Name, LogLevel.Information);
             builder.AddConsole();
-        });
+        });//cái này dùng để in ra nội dung trong file log
 
         public DbSet<Product> products { get; set; }
         public DbSet<Category> categories { get; set; }
@@ -27,6 +29,15 @@ namespace EF
             optionsBuilder.UseLoggerFactory(loggerFactory);
             optionsBuilder.UseSqlServer(connectionString);
             optionsBuilder.UseLazyLoadingProxies();//tự động nạp những cái reference
+            Console.WriteLine("OnConfiguring");
+        }
+
+        //cách để tạo ra fluent API
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            //Fluent API
+            Console.WriteLine("OnModelCreating");
         }
     }
 }

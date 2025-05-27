@@ -69,7 +69,28 @@ namespace EF
         static void ReadProduct()
         {
             using var dbcontext = new ShopContext();
-                        
+
+            var kq = from p in dbcontext.products
+                     join c in dbcontext.categories on p.CategId equals c.CategoryID
+                     select new
+                     {
+                         ten = p.Name,
+                         danhmuc = c.Name,
+                         gia = p.Price
+                     };
+            kq.ToList().ForEach(abc => Console.WriteLine(abc));
+
+            // var products = from p in dbcontext.products
+            //                where p.Price >= 500
+            //                select p;
+            // var products = from p in dbcontext.products
+            //                where p.Name.Contains("i")
+            //                orderby p.Price
+            //                select p;
+            // products.Take(2).ToList().ForEach(p => p.PrintInfor());
+            //Take(2) là lấy ra 2 sp đầu tiên
+            //khi gọi products.ToList() thì mới thực sự truy vấn tới database
+
             // //truy vấn dạng join bảng để lấy nhiều hàng dữ liệu
             // var category = (from c in dbcontext.categories
             //                 where c.CategoryID == 2
@@ -156,8 +177,8 @@ namespace EF
             // DropDatabase();
 
             //Insert, Select, Update, Delete
-            InsertData();
-            // ReadProduct();
+            // InsertData();
+            ReadProduct();
             // RenameProduct(1, "Laptop 02");
             // DeleteCategory();
 

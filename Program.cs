@@ -173,8 +173,8 @@ namespace EF
             // --product
 
             //Create, Drop Database
+            DropDatabase();
             CreateDatabase();
-            // DropDatabase();
 
             //Insert, Select, Update, Delete
             // InsertData();

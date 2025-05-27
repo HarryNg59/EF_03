@@ -18,5 +18,7 @@ namespace EF
 
         //Collect Nagivation: điều hướng tập hợp -> ko tạo ra Foreign key
         public virtual List<Product> Products { set; get; }
+
+        public CategoryDetails categoryDetails { set; get; }
     }
 }
